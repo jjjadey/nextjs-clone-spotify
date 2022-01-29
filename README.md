@@ -33,6 +33,11 @@ NEXT_PUBLIC_CLIENT_SECRET = click show client secret and copy it
 
 Note: `JWT_SECRET` is your some super secret value
 
+## Run project
+1. `npm i`
+2. `npm run dev`
+
+
 ## Preview
 
 Preview the example live on [StackBlitz](http://stackblitz.com/):
