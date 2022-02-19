@@ -30,7 +30,7 @@ const Center = () => {
     useEffect(() => {
         spotifyApi.getPlaylist(playlistId)
             .then((data) => {
-                console.log("your playlist data:",data.body);
+                console.log("your playlist data:", data.body);
                 setPlaylist(data.body);
             })
             .catch((err) => {
@@ -54,8 +54,14 @@ const Center = () => {
             </header>
 
             <section className={`flex items-end space-x-7
-            bg-gradient-to-b to-black ${color} h-80 text-white padding-8  w-full`}>
-                {/* <h1>hello</h1> */}
+            bg-gradient-to-b to-black ${color} h-80 text-white padding-8  w-full padding-8`}>
+                <img src={playlist?.images?.[0]?.url}
+                    alt=""
+                    className="h-44 w-44 shadow-2xl" />
+                <div>
+                    <p>PLAYLIST</p>
+                    <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">{playlist?.name}</h1>
+                </div>
             </section>
         </div>
     )
