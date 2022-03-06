@@ -12,9 +12,26 @@ const Song = ({ order, track }) => {
     const playSong = () => {
         setCurrentTrackId(track.track.id);
         setIsPlaying(true);
-        spotifyApi.play({
-            uri: [track.track.uri],
-        })
+        // console.info('uri', track.track.uri)
+        spotifyApi.getMyDevices()
+            .then(function (data) {
+                let availableDevices = data.body.devices;
+                // console.log('all devices:', availableDevices);
+                const activeDevice = availableDevices.filter((device) => {
+                    return device.is_active === true
+                })
+                // console.log('activeDevice: ', activeDevice);
+
+                if (activeDevice.length !== 0 && activeDevice[0].is_active) {
+                    spotifyApi.play({
+                        device: activeDevice[0].id,
+                        uris: [track.track.uri],
+                    })
+                }
+                else {
+                    console.error('Not found active device. Please open spotify web or app and play')
+                }
+            })
     }
 
     return (
