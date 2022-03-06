@@ -31,12 +31,14 @@ NEXT_PUBLIC_CLIENT_SECRET = click show client secret and copy it
 
 6\. Click `Edit Settings` in your Spotify app. Then add Redirect URIs `http://localhost:3000/api/auth/callback/spotify`
 
-Note: `JWT_SECRET` is your some super secret value
+Note: 
+- `JWT_SECRET` is your some super secret value
+- `spotifyApi.play` can use only Spotify Premium 
+
 
 ## Run project
 1. `npm i`
 2. `npm run dev`
-
 
 ## Preview
 
