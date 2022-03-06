@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 import { useSession } from 'next-auth/react';
 import { useRecoilState } from 'recoil';
 import { currentTrackIdState, isPlayingState } from '../atoms/songAtom';
@@ -49,7 +50,20 @@ const Player = () => {
             fetchCurrentSong();
             setVolume(50);
         }
-    }, [currentTrackId, spotifyApi, session])
+    }, [currentTrackId, spotifyApi, session]);
+
+    useEffect(() => {
+        if (volume > 0 && volume < 100) {
+            debounceAdjustVolume(volume);
+        }
+    }, [volume]);
+
+    const debounceAdjustVolume = useCallback(
+        debounce((volume) => {
+            spotifyApi.setVolume(volume);
+        }, 500),
+        []
+    );
 
     return (
         <div className="h-24 bg-gradient-to-b from-black to-gray-900 text-white
